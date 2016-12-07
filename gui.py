@@ -14,11 +14,11 @@ class DateEntry(tk.Frame):
         args = {'relief': tk.FLAT}
         args.update(look)
         self.message = tk.Label(self, text='yyyy/mm/dd', **args)
-        self.entry_1 = tk.Entry(self, width=4, **args, textvariable=self.year)
+        self.entry_1 = tk.Entry(self, width=4, textvariable=self.year, **args)
         self.label_1 = tk.Label(self, text='/', **args)
-        self.entry_2 = tk.Entry(self, width=2, **args, textvariable=self.month)
+        self.entry_2 = tk.Entry(self, width=2, textvariable=self.month, **args)
         self.label_2 = tk.Label(self, text='/', **args)
-        self.entry_3 = tk.Entry(self, width=2, **args, textvariable=self.day)
+        self.entry_3 = tk.Entry(self, width=2, textvariable=self.day, **args)
         self.message.pack(side=tk.TOP)
 
         self.entry_1.pack(side=tk.LEFT)

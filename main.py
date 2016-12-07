@@ -1,26 +1,28 @@
+import math
 import tkinter as tk
 from datetime import datetime
 
 import matplotlib as plt
-import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure
 
 from gui import DateEntry
+from planets import Planets_Vec
 from utils import is_valid_date
 
 plt.use('TkAgg')
+default_day = datetime(year=1957, month=1, day=1)
+
+day_length = 86400  # seconds
 
 
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.date_value = datetime(year=1957, month=10, day=4)
-        self.f = plt.figure.Figure(figsize=(5, 4), dpi=100)
-        self.a = self.f.add_subplot(111)
-        self.t = np.arange(0.0, 3.0, 0.01)
-        self.s = np.sin(2 * np.pi * self.t)
-        self.a.plot(self.t, self.s)
+        self.f = plt.figure.Figure(figsize=(12, 15), dpi=100)
+        self.a = self.f.add_subplot(111, projection='polar')
+        self.plot_solar_system()
         self.pack()
         self.create_widgets()
 
@@ -73,14 +75,40 @@ class Application(tk.Frame):
                 print("Valid date found!!!")
                 self.date_value = datetime(year=date_array[2], month=date_array[1], day=date_array[0])
                 print(self.date_value)
-                self.a.cla()
-                s = np.sin(day * np.pi * self.t)
-                self.a.plot(self.t, s)
-                self.canvas.draw()
                 self.my_date.set(self.date_value)
+                self.plot_solar_system()
+                self.canvas.draw()
+
             else:
                 print("Invalid date :(")
             print(date_array)
+
+    def plot_solar_system(self):
+        mercury_nu = math.radians(333.3721)
+        venus_nu = math.radians(88.7083)
+        earth_nu = math.radians(358.3110)
+        mars_nu = math.radians(79.7596)
+        jupiter_nu = math.radians(157.2837)
+        saturn_nu = math.radians(152.4320)
+        uranus_nu = math.radians(316.3032)
+        neptune_nu = math.radians(129.1372)
+        pluto_nu = math.radians(287.1723)
+        nu_vec = [mercury_nu, venus_nu, earth_nu, mars_nu, jupiter_nu, saturn_nu, uranus_nu, neptune_nu]
+        tdiff = self.date_value - default_day
+        print("Date diff " + str(tdiff))
+        self.a.cla()
+        self.a.set_theta_zero_location("W")
+        for (Planet, nu) in zip(Planets_Vec, nu_vec):
+            (_, rem) = divmod(tdiff.days * day_length + tdiff.seconds, Planet.period)
+            Planet.mo = float('nan')
+            Planet.ecc_anomaly = float('nan')
+            Planet.nu = nu
+            Planet.find_eccentric_anomaly()
+            Planet.find_mean_anomaly()
+            Planet.propagate(rem)
+            Planet.polar_plot(time_step=day_length, fig=self.a, label=Planet.name)
+        self.a.legend(bbox_to_anchor=(1, 1),
+                      bbox_transform=self.f.transFigure)
 
 
 if __name__ == '__main__':
