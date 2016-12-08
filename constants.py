@@ -51,3 +51,6 @@ j2_uranus = 0.012  # unit less
 rad_neptune = 24764 * 1000  # (m)
 mu_neptune = 6.809 * 10 ** 6 * 1000 ** 3  # (m^3/s^2)
 j2_neptune = 0.004  # unit less
+
+# G
+G = 6.67384 * 10 ** -11

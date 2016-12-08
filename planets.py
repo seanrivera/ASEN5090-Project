@@ -37,7 +37,7 @@ omega_mars = math.radians(286.198)
 Mars = Orbit(a=a_mars, e=e_mars, i=i_mars, Omega=Omega_mars, omega=omega_mars, mu=mu_sun, name="Mars")
 
 # jupiter
-a_jupiter = 778298361 * 1000
+a_jupiter = 778122103.1098 * 1000
 e_jupiter = 0.04849
 i_jupiter = math.radians(1.30327)
 Omega_jupiter = math.radians(100.464)

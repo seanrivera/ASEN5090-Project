@@ -217,6 +217,8 @@ class Orbit:
             self.mo += self.n * time_step
             if self.mo > 2 * math.pi:
                 self.mo -= 2 * math.pi
+            if self.mo < - 2 * math.pi:
+                self.mo += 2 * math.pi
             self.find_eccentric_anomaly()
             self.find_true_anomaly()
         if not isnan(self.tp):

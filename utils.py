@@ -11,3 +11,6 @@ def is_valid_date(d, m, y):
     return 0 < m <= 12 and 0 < d <= days_in_month(m, y) and 1957 <= y < 2100
 
 
+class OrbitGraph():
+    def __init__(self, orbit_list):
+        self.edges = {}
