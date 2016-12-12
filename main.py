@@ -41,7 +41,7 @@ class Application(tk.Frame):
         # Center Frame
         self.my_date = tk.StringVar()
         self.output = tk.StringVar()
-        self.current_date = tk.Label(self.center_frame, font=('times', 20, 'bold'), bg='green',
+        self.current_date = tk.Label(self.center_frame, font=('times', 16, 'bold'), bg='green',
                                      textvariable=self.my_date)
         self.current_date.pack(side=tk.TOP)
         self.my_date.set(self.date_value)
@@ -55,23 +55,23 @@ class Application(tk.Frame):
         self.canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
         # Right Frame
-        self.request1 = tk.Label(self.right_frame, font=('Helvetica', 20, 'bold'), text="Change the display date below")
+        self.request1 = tk.Label(self.right_frame, font=('Helvetica', 16, 'bold'), text="Change the display date below")
         self.request1.pack(side=tk.TOP)
-        self.dentry = DateEntry(self.right_frame, font=('Helvetica', 40, tk.NORMAL), border=0)
+        self.dentry = DateEntry(self.right_frame, font=('Helvetica', 36, tk.NORMAL), border=0)
         self.dentry.pack(side=tk.TOP)
         self.dentry.day.trace("w", self.check_date)
         self.dentry.month.trace("w", self.check_date)
         self.dentry.year.trace("w", self.check_date)
-        self.request2 = tk.Label(self.right_frame, font=('Helvetica', 20, 'bold'),
+        self.request2 = tk.Label(self.right_frame, font=('Helvetica', 16, 'bold'),
                                  text="Enter the Orbital elements of the\n goal heliocentric orbit below ")
         self.request2.pack(side=tk.TOP)
-        self.oentry = OrbitEntry(self.right_frame, font=('Helvetica', 40, tk.NORMAL), border=0)
+        self.oentry = OrbitEntry(self.right_frame, font=('Helvetica', 36, tk.NORMAL), border=0)
         self.oentry.pack(side=tk.TOP)
 
-        self.request3 = tk.Label(self.right_frame, font=('Helvetica', 20, 'bold'),
+        self.request3 = tk.Label(self.right_frame, font=('Helvetica', 16, 'bold'),
                                  text="Enter the desired arrival date of the satellite")
         self.request3.pack(side=tk.TOP)
-        self.dentry2 = DateEntry(self.right_frame, font=('Helvetica', 40, tk.NORMAL), border=0)
+        self.dentry2 = DateEntry(self.right_frame, font=('Helvetica', 36, tk.NORMAL), border=0)
         self.dentry2.pack(side=tk.TOP)
 
         self.results = tk.Label(self.right_frame, font=('Helvetica', 12), bg='red',
